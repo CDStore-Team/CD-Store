@@ -60,8 +60,11 @@
 
 Для візуалізації та контролю цього плану команда використовуватиме:
 
-* **Trello / GitHub Projects:** Для відстеження щоденних тасків.
+* **Trello / GitHub Projects:** Для відстеження щоденних тасок.
 * **TeamGantt:** Для візуального моніторингу дедлайнів.
-* **Discord:** Для миттєвої синхронізації.
+* **Telegram:** Для миттєвої синхронізації.
+
+# made using Mermaid vs code extension
+![arch.svg](../diagrams/images/arch.svg)
 
 ---

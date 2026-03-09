@@ -86,6 +86,9 @@
 * **Database:** PostgreSQL (для складних запитів та фільтрації).
 * **Infrastructure:** GitHub (репозиторій), Vercel/Render (хостинг), Supabase (БД/Auth).
 
+# made using Mermaid vs code extension
+![planning.svg](../diagrams/images/planning.svg)
+
 ---
 
 *Документ підготував: Команда розробників CD-Marketplace*

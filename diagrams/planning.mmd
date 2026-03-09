@@ -1,0 +1,23 @@
+gantt
+    title План реалізації проєкту CD-Marketplace (12 днів)
+    dateFormat  DD
+    axisFormat  День %e
+
+    section Фаза 1: Дизайн
+    Збір вимог та макети Figma   :active, p1, 01, 2d
+    
+    section Фаза 2: Архітектура
+    Проєктування БД та API       :p2, after p1, 2d
+    Налаштування Auth-системи    :p2b, after p1, 2d
+    
+    section Фаза 3: Розробка MVP
+    Форма додавання диска        :p3, after p2, 2d
+    Каталог та фільтрація        :p3b, after p3, 2d
+    
+    section Фаза 4: QA
+    Бета-тестування та багфікс   :p4, after p3b, 2d
+    
+    section Фаза 5: Реліз
+    Деплой на хостинг            :p5, after p4, 1d
+    Наповнення бази товарами     :p5b, after p4, 2d
+    

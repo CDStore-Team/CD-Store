@@ -1,0 +1,37 @@
+flowchart TB
+ subgraph subGraph0["Публічна частина (Каталог)"]
+        Search["Пошук та Фільтрація"]
+        Home["Головна сторінка"]
+        List["Результати пошуку"]
+        Details["Картка диска / Деталі"]
+        Contact["Контакти продавця"]
+  end
+ subgraph subGraph1["Приватна частина (Продавець)"]
+        MyAds["Мої оголошення"]
+        Cabinet["Особистий кабінет"]
+        AddCD["+ Виставити диск на продаж"]
+        Form["Форма: Назва, Жанр, Виконавець, Ціна, Фото"]
+        Validation{"Валідація?"}
+        Publish["Опублікувати"]
+        Edit["Редагувати / Видалити"]
+  end
+    User(("Користувач")) -- Відвідує сайт --> Home
+    Home --> Search & Auth{"Авторизація?"}
+    Search -- Жанр / Виконавець --> List
+    List --> Details
+    Details -- Клік --> Contact
+    Auth -- Ні --> Register["Реєстрація / Вхід"]
+    Auth -- Так --> Cabinet
+    Cabinet --> MyAds & AddCD
+    AddCD --> Forma
+    Form --> Validation
+    Validation -- OK --> Publish
+    Publish -- З'являється в --> List
+    MyAds --> Edit
+    Register -.-> Cabinet
+    Contact -. Вимагає .-> Register
+    
+
+    style User fill:transparent
+    style subGraph0 fill:transparent
+    style subGraph1 fill:transparent
