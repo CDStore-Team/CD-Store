@@ -4,7 +4,7 @@ This guide explains how to run **Vinyl Vibe Market** locally after cloning the r
 
 ## Prerequisites
 
-- **Node.js** 18 or newer (20 LTS is a good default) and **npm**
+- **Node.js** 18 or newer (20 LTS is a good default) and **bun**
 - A **[Supabase](https://supabase.com)** account (free tier is enough)
 - For Google sign-in: a **[Google Cloud](https://console.cloud.google.com)** project with OAuth client credentials
 
@@ -13,7 +13,7 @@ This guide explains how to run **Vinyl Vibe Market** locally after cloning the r
 ```bash
 git clone <repository-url>
 cd Project
-npm install
+bun install	# or npm install
 ```
 
 ## 2. Create a Supabase project
@@ -79,32 +79,32 @@ The app uses [Supabase Auth](https://supabase.com/docs/guides/auth) with the **G
 1. **Authentication** → **Providers** → **Google**.
 2. Enable Google and paste the **Client ID** and **Client secret** from Google.
 3. **Authentication** → **URL Configuration**:
-   - **Site URL**: your app origin for local dev, e.g. `http://localhost:5173`
-   - **Redirect URLs**: add `http://localhost:5173/**` or explicitly `http://localhost:5173/auth` so the redirect after OAuth is allowed
+   - **Site URL**: your app origin for local dev, e.g. `http://localhost:8080`
+   - **Redirect URLs**: add `http://localhost:8080/**` or explicitly `http://localhost:8080/auth` so the redirect after OAuth is allowed
 
 Without these steps, Google sign-in will fail or redirect incorrectly.
 
 ## 6. Run the app
 
 ```bash
-npm run dev
+bun run dev
 ```
 
-Open the URL printed in the terminal (typically `http://localhost:5173`). Use **Вхід** (auth) and **Увійти через Google** to test login.
+Open the URL printed in the terminal (typically `http://localhost:8080`). Use **Вхід** (auth) and **Увійти через Google** to test login.
 
 Other useful commands:
 
 | Command | Purpose |
 |---------|---------|
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Serve the production build locally |
-| `npm run test` | Run Vitest |
-| `npm run lint` | ESLint |
+| `bun run build` | Production build to `dist/` |
+| `bun run preview` | Serve the production build locally |
+| `bun run test` | Run Vitest |
+| `bun run lint` | ESLint |
 
 ## 7. Troubleshooting
 
 - **Blank screen or Supabase errors in the console**  
-  Check that `.env` exists, variable names match `.env.example`, and you restarted `npm run dev` after changing env vars.
+  Check that `.env` exists, variable names match `.env.example`, and you restarted `bun run dev` after changing env vars.
 
 - **“Invalid API key” or CORS**  
   Confirm you used the **anon** key, not `service_role`, and the **Project URL** is correct.
