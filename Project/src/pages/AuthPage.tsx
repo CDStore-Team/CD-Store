@@ -29,8 +29,11 @@ const AuthPage = () => {
   }, [navigate]);
 
   const handleGoogleLogin = async () => {
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-    const redirectUrl = `${window.location.origin}${base}/auth`;
+		const repoPath =
+			window.location.hostname.includes("github.io")
+				? 'CD-Store'
+				: '';
+    const redirectUrl = `${window.location.origin}/${repoPath}/#/auth`;
 
     await supabase.auth.signInWithOAuth({
       provider: "google",

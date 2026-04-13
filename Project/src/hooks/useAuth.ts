@@ -14,11 +14,12 @@ async function fetchProfile(user: SupabaseUser): Promise<AuthProfile> {
   const { data, error } = await supabase
     .from("profiles")
     .select("display_name, avatar_url")
-    .eq("user_id", user.id)
+    .eq("id", user.id)
     .single();
 
   if (error) {
-    toast.error("Не вдалося завантажити профіль");
+		toast.error("Не вдалося завантажити профіль");
+    console.error("Не вдалося завантажити профіль:", error);
   }
 
   return {
@@ -89,7 +90,8 @@ export function useAuth() {
   }, [setCurrentUser]);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+		await supabase.auth.signOut();
+		console.log("\nрозлогін\n");
     setUser(null);
     setProfile(null);
     setCurrentUser(null);
