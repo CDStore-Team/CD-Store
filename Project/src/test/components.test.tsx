@@ -3,17 +3,18 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { useAppStore } from "@/lib/store";
 import { mockCDs, mockUsers, mockMessages } from "@/lib/mockData";
+import React from "react";
 
 // Мокаємо framer-motion, щоб уникнути проблем з анімаціями у тестах
 vi.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
-    form: ({ children, onSubmit, ...props }: any) => (
+    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <div {...props}>{children}</div>,
+    h1: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => <h1 {...props}>{children}</h1>,
+    form: ({ children, onSubmit, ...props }: React.PropsWithChildren<React.FormHTMLAttributes<HTMLFormElement>>) => (
       <form onSubmit={onSubmit} {...props}>{children}</form>
     ),
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
 }));
 
 // Мокаємо Supabase
