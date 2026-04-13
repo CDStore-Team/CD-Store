@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        var path = window.location.pathname;
+        var hash = window.location.hash;
+        
+        var repoName = '/CD-Store/';
+        var newUrl = repoName + '#' + path.replace(repoName, '/') + hash;
+        
+        window.location.replace(newUrl);
+    </script>
+</head>
+<body>
+    Завантаження...
+</body>
+</html>

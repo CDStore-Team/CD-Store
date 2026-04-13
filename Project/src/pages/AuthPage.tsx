@@ -5,25 +5,41 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
 const AuthPage = () => {
-  const navigate = useNavigate();
-  const { profile, loading } = useAuth();
+	const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && profile) {
-      navigate("/");
-    }
-  }, [loading, profile, navigate]);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        console.log("Login successful, redirection...");
+        navigate("/");
+      }
+    });
+
+    const handleHashToken = async () => {
+      const hash = window.location.hash;
+      if (hash.includes("access_token=")) {
+        const rawHash = hash.substring(hash.indexOf("access_token="));
+        const newUrl = `${window.location.origin}${window.location.pathname}#${rawHash}`;
+        window.location.replace(newUrl);
+      }
+    };
+
+    handleHashToken();
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
+    const isGithubPages = window.location.hostname.includes("github.io");
+    const repoPath = isGithubPages ? 'CD-Store' : '';
+    const redirectUrl = `${window.location.origin}/${repoPath}/#/auth`;
+
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: redirectUrl,
       },
     });
-    if (error) {
-      console.error("Google login error:", error);
-    }
   };
 
   return (
